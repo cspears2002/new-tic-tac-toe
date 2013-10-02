@@ -142,14 +142,16 @@ textarea {
 }
 
 .player_1_radio {
-  width: 153px;
+  width: 151px;
   float: left;
+  padding-left: 2px;
 }
 
 .player_2_radio {
-  width: 153px;
+  width: 151px;
   height: 22px;
   float: right;
+  padding-right: 2px;
 }
 
 /* -----Win Notification----- */
