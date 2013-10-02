@@ -204,6 +204,7 @@ textarea {
   width: 306px;
   height: 328px;
   position: relative;
+  padding-top: 10px;
 }
 
 .box {
@@ -220,18 +221,7 @@ textarea {
   line-height: 100px;
 }
 
-.row_1 {
-  margin-top: 10px;
-  width: 306px;
-  height: 102px;
-}
-
-.row_2 {
-  width: 306px;
-  height: 102px;
-}
-
-.row_3 {
+.row {
   width: 306px;
   height: 102px;
 }

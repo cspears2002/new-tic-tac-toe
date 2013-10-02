@@ -1,4 +1,4 @@
-<div class="super_container">
+<div class="super_container" ng-init="ticTacToe = [['X','','O'],['','X',''],['O','','']];">
   <!-- Reset button -->
 	<div class="restart">
 		<div id="reset_button" onclick="resetGame(reset_button)"></div>
@@ -37,20 +37,10 @@
 
 		<div class="win_notification" id="win_popup"></div>
 
-		<div class="row_1">
-			<div class="box" id="box1_1"></div>
-			<div class="box" id="box1_2"></div>
-			<div class="box" id="box1_3"></div>
-		</div>
-		<div class="row_2">
-			<div class="box" id="box2_1"></div>
-			<div class="box" id="box2_2"></div>
-			<div class="box" id="box2_3"></div>
-		</div>
-		<div class="row_3">
-			<div class="box" id="box3_1"></div>
-			<div class="box" id="box3_2"></div>
-			<div class="box" id="box3_3"></div>
-		</div>
+		<!-- Create board -->
+		<div class="row" ng-repeat="row in ticTacToe">
+      		<div class="box" ng-repeat="cell in row">{{cell}}</div>
+    	</div>
+
 	</div
 </div>

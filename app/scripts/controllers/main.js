@@ -9,7 +9,7 @@ angular.module('newTicApp')
     ];
   });
 
-/*
+
 
 function attachFunction() {
 	var boxes = document.getElementsByClassName("box");
@@ -99,4 +99,3 @@ function identifyWin() {
 		}
 	}
 }
-*/
