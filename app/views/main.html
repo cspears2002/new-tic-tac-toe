@@ -1,0 +1,56 @@
+<div class="super_container">
+  <!-- Reset button -->
+	<div class="restart">
+		<div id="reset_button" onclick="resetGame(reset_button)"></div>
+	</div>
+
+	<!-- Sets who puts down a 'X' or an 'O' -->
+	<div class="radio_container clearfix">
+		<div class="player_1_radio">
+			<input type="radio" name="player" id="player_1">
+			<label>Player 1</label>
+		</div>
+		<div class="player_2_radio">
+			<div class="player_2_inner">
+				<label>Player 2</label>
+				<input type="radio" name="player" id="player_2">
+			</div>
+		</div>
+	</div>
+
+	<!-- Game board -->
+	<div class="board_container">
+
+		<div class="reset_notification" id="reset_popup">
+			<div class="reset_buttons_labels">
+				New Game?
+				<div class="yes_button">
+					<label>Yes?</label>
+					<input type="button">
+				</div>
+				<div class="no_button">
+				  <label>No?</label>
+					<input type="button">
+				</div>
+			</div>
+		</div>
+
+		<div class="win_notification" id="win_popup"></div>
+
+		<div class="row_1">
+			<div class="box" id="box1_1"></div>
+			<div class="box" id="box1_2"></div>
+			<div class="box" id="box1_3"></div>
+		</div>
+		<div class="row_2">
+			<div class="box" id="box2_1"></div>
+			<div class="box" id="box2_2"></div>
+			<div class="box" id="box2_3"></div>
+		</div>
+		<div class="row_3">
+			<div class="box" id="box3_1"></div>
+			<div class="box" id="box3_2"></div>
+			<div class="box" id="box3_3"></div>
+		</div>
+	</div
+</div>
