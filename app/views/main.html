@@ -1,4 +1,5 @@
-<div class="super_container" ng-init="ticTacToe = [['X','','O'],['','X',''],['O','','']];">
+<div class="super_container" ng-init="ticTacToe = [['','',''],['','',''],['','','']];" onload="attachFunction();">
+
   <!-- Reset button -->
 	<div class="restart">
 		<div id="reset_button" onclick="resetGame(reset_button)"></div>
@@ -39,7 +40,7 @@
 
 		<!-- Create board -->
 		<div class="row" ng-repeat="row in ticTacToe">
-      		<div class="box" ng-repeat="cell in row">{{cell}}</div>
+      		<div class="box" ng-repeat="cell in row">X</div>
     	</div>
 
 	</div
