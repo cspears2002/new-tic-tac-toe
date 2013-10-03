@@ -7,8 +7,13 @@ angular.module('newTicApp')
       'AngularJS',
       'Karma'
     ];
-  });
 
+    $scope.addXO = function() {
+    	var greeting = "Hello world!";
+    	event.target.innerHTML = greeting;
+  	};
+
+  });
 
 
 function attachFunction() {

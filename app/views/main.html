@@ -39,10 +39,10 @@
 		<div class="win_notification" id="win_popup"></div>
 
 		<!-- Create board -->
-		<div class="row" ng-repeat="row in ticTacToe">
-      		<div class="box" ng-repeat="cell in row" ng-click="greeting='Hi!'">
-      			{{greeting}}
-      		</div>
+		<div ng-controller="MainCtrl">
+			<div class="row" ng-repeat="row in ticTacToe">
+      			<div class="box" ng-repeat="cell in row" ng-click="addXO()"></div>
+    		</div>
     	</div>
 
 	</div
