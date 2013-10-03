@@ -2,45 +2,33 @@
 
 angular.module('newTicApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+
+    $scope.ticTacToe = [
+    	['','',''],
+    	['','',''],
+    	['','','']
     ];
 
+    $scope.box = "";
+
     $scope.addXO = function() {
-    	var greeting = "Hello world!";
-    	event.target.innerHTML = greeting;
+    	var rd_plyer_1 = document.getElementById('player_1');
+		var rd_plyer_2 = document.getElementById('player_2');
+
+		if (rd_plyer_1.checked && this.box != "O")
+			this.box = "X";
+
+		if (rd_plyer_2.checked && this.box != "X")
+			this.box = "O";
   	};
 
   });
 
 
-function attachFunction() {
-	var boxes = document.getElementsByClassName("box");
-	for (var i = 0; i < boxes.length; i++) {
-		boxes[i].onclick = addXO;
-	};
-}
-
 function resetGame(element){
 	element.style.background = '#ff0000';
 
 	document.getElementById("reset_popup").style.display = "block";
-}
-
-function addXO(){
-
-	var rd_plyer_1 = document.getElementById('player_1');
-	var rd_plyer_2 = document.getElementById('player_2');
-
-	if (rd_plyer_1.checked && event.target.innerHTML != "O")
-		event.target.innerHTML = "X";
-
-	if (rd_plyer_2.checked && event.target.innerHTML != "X")
-		event.target.innerHTML = "O";
-
-	identifyWin(rd_plyer_1, rd_plyer_2);
 }
 
 function changeBgClr() {
@@ -60,8 +48,8 @@ function changeBgClr() {
 	}
 }
 
-function identifyWin() {
-	var cellArray = [["","",""],["","",""],["","",""]];
+function identifyWin(cellArray) {
+	
 	for (var r = 1; r <= 3 ; ++r)
 	{
 		for(var c = 1; c <= 3; ++c) 
@@ -70,7 +58,7 @@ function identifyWin() {
 			cellArray[r-1][c-1] = document.getElementById(div_id).innerHTML;
 		}
 	}
-
+	
 	// Test diagonals
 	if (cellArray[1][1] != "") {
 		if ((cellArray[0][0] == cellArray[1][1] &&
