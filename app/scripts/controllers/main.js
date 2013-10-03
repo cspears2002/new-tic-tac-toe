@@ -12,13 +12,10 @@ angular.module('newTicApp')
     $scope.box = "";
 
     $scope.addXO = function() {
-    	var rd_plyer_1 = document.getElementById('player_1');
-		var rd_plyer_2 = document.getElementById('player_2');
-
-		if (rd_plyer_1.checked && this.box != "O")
+		if ($scope.radio == 1 && this.box != "O")
 			this.box = "X";
 
-		if (rd_plyer_2.checked && this.box != "X")
+		if ($scope.radio == 2 && this.box != "X")
 			this.box = "O";
   	};
 
