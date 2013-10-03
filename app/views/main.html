@@ -42,7 +42,7 @@
 		<!-- Create board -->
 		<div ng-controller="MainCtrl">
 			<div class="row" ng-repeat="row in ticTacToe">
-      			<div class="box" ng-repeat="cell in row" ng-click="addXO()">{{box}}</div>
+      			<div class="box" ng-model="ticTacToe" ng-repeat="cell in row" ng-click="addXO()">{{box}}</div>
     		</div>
     	</div>
 
