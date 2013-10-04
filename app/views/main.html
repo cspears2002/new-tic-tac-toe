@@ -2,7 +2,7 @@
 
   <!-- Reset button -->
 	<div class="restart">
-		<div id="reset_button" onclick="resetGame(reset_button)"></div>
+		<div id="reset_button" ng-click="resetStyle={background:'red'}" ng-style="resetStyle"></div>
 	</div>
 
 	<!-- Sets who puts down a 'X' or an 'O' -->
@@ -26,20 +26,25 @@
 			<div class="reset_buttons_labels">
 				New Game?
 				<div class="yes_button">
-					<label>Yes?</label>
-					<input type="button">
+					<div class="y_n_label">
+						<label>Yes?</label>
+					</div>
+					<div class="y_n_button">
+						<input type="button">
+					</div>
 				</div>
 				<div class="no_button">
-				 	<label>No?</label>
-					<input type="button">
+					<div class="y_n_label">
+				 		<label>No?</label>
+				 	</div>
+				 	<div class="y_n_button">
+						<input type="button">
+					</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="win_notification" id="win_popup"></div>
 		
 		<!-- Create board -->
-		{{ticTacToe}}
 		<div>
 			<div class="row clearfix" ng-repeat="row in ticTacToe">
       			<div class="box" ng-bind="cell" ng-repeat="cell in row" ng-click="addXO($parent.$index, $index)"></div>

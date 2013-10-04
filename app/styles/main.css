@@ -125,7 +125,6 @@ textarea {
   width: 100px;
   height: 50px;
   margin-bottom: 10px;
-  background-color: green;
   opacity: 0.8;
 }
 
@@ -175,26 +174,21 @@ textarea {
 }
 
 .yes_button {
-  margin: 5px;
+  width: 70%;
+  margin: 10px;
 }
 
 .no_button {
-  margin: 5px;
+  width: 70%;
+  margin: 10px;
 }
 
-.win_notification {
-  width: 70%;
-  height: 230px;
-  margin: 0 auto;
-  top: 41px;
-  left: 45.9px;
-  color: white;
-  background-color: #666666;
-  position: absolute;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  opacity: 0.8;
-  display: none;
+.y_n_label {
+  float: left;
+}
+
+.y_n_button {
+  float: left;
 }
 
 /* -----Game board----- */

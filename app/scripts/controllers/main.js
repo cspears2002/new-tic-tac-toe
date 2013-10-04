@@ -11,6 +11,7 @@ angular.module('newTicApp')
 
     $scope.winStyle = {};
     $scope.winStyle2 = {};
+    $scope.resetStyle = {background:'green'}
 
     $scope.visible = false;
 
