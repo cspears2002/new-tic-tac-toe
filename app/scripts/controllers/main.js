@@ -9,6 +9,8 @@ angular.module('newTicApp')
     	['','','']
     ];
 
+    $scope.winStyle = {};
+
     $scope.addXO = function(p_index,index) {
 		if ($scope.radio == 1 && $scope.ticTacToe[p_index][index] != "O")
 			$scope.ticTacToe[p_index][index]  = "X";
@@ -56,15 +58,12 @@ angular.module('newTicApp')
 
 	$scope.changeBgClr = function() {
 
-		radio_container_1 = document.getElementsByClassName("player_1_radio")[0];
-		radio_container_2 = document.getElementsByClassName("player_2_radio")[0];
-
 		if ($scope.radio == 1) {
-			radio_container_1.style.backgroundColor = '#ffff11';
+			$scope.winStyle = {background:'#ffff11'};
 		}
 
 		if ($scope.radio == 2) {
-			radio_container_2.style.backgroundColor = '#ffff11';
+			$scope.winStyle = {background:'#ffff11'};
 		}
 	};
 

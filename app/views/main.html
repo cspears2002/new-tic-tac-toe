@@ -7,10 +7,9 @@
 
 	<!-- Sets who puts down a 'X' or an 'O' -->
 	<div class="radio_container clearfix">
-		<div class="player_1_radio">
+		<div class="player_1_radio" ng-style="winStyle">
 			<input type="radio" name="player" id="player_1" ng-model="radio" value="1">
 			<label>Player 1</label>
-			{{radio_1}}
 		</div>
 		<div class="player_2_radio">
 			<div class="player_2_inner">
