@@ -9,21 +9,17 @@ angular.module('newTicApp')
     	['','','']
     ];
 
-    $scope.box = "";
+    $scope.addXO = function(p_index,index) {
+		if ($scope.radio == 1 && $scope.ticTacToe[p_index][index] != "O")
+			$scope.ticTacToe[p_index][index]  = "X";
 
-    $scope.addXO = function() {
-		if ($scope.radio == 1 && this.box != "O")
-			this.box = "X";
+		if ($scope.radio == 2 && $scope.ticTacToe[p_index][index]  != "X")
+			$scope.ticTacToe[p_index][index]  = "O";
 
-		if ($scope.radio == 2 && this.box != "X")
-			this.box = "O";
-
-		$scope.identifyWin($scope.ticTacToe)
+		$scope.identifyWin($scope.ticTacToe);
   	};
 
 	$scope.identifyWin = function(cellArray) {
-		console.log(cellArray)
-	
 		// Test diagonals
 		if (cellArray[1][1] != "") {
 			if ((cellArray[0][0] == cellArray[1][1] &&

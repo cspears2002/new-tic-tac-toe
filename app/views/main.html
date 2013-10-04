@@ -38,13 +38,14 @@
 		</div>
 
 		<div class="win_notification" id="win_popup"></div>
-
+		
 		<!-- Create board -->
-		<div ng-controller="MainCtrl">
-			<div class="row" ng-repeat="row in ticTacToe">
-      			<div class="box" ng-model="ticTacToe" ng-repeat="cell in row" ng-click="addXO()">{{box}}</div>
+		{{ticTacToe}}
+		<div>
+			<div class="row clearfix" ng-repeat="row in ticTacToe">
+      			<div class="box" ng-bind="cell" ng-repeat="cell in row" ng-click="addXO($parent.$index, $index)"></div>
     		</div>
     	</div>
 
-	</div
+	</div>
 </div>
