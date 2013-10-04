@@ -27,7 +27,7 @@ angular.module('newTicApp')
 				(cellArray[0][2] == cellArray[1][1] &&
 			 	 cellArray[1][1] == cellArray[2][0])) 
 			{
-				$scope.changeBgClr;		
+				$scope.changeBgClr();		
 			}
 		}
 
@@ -38,7 +38,7 @@ angular.module('newTicApp')
 			   cellArray[1][c-1] == cellArray[2][c-1]  && 
 		   	   cellArray[0][c-1] != "")
 			{
-				$scope.changeBgClr;
+				$scope.changeBgClr();
 			}
 		}
 
@@ -49,7 +49,7 @@ angular.module('newTicApp')
 		   	   cellArray[r-1][1] == cellArray[r-1][2]  && 
 		   	   cellArray[r-1][0] != "")
 			{
-				$scope.changeBgClr;
+				$scope.changeBgClr();
 			}
 		}
 	};
