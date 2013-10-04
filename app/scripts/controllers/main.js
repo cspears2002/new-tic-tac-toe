@@ -3,6 +3,7 @@
 angular.module('newTicApp')
   .controller('MainCtrl', function ($scope) {
 
+  	// Represents tic tac toe board.
     $scope.ticTacToe = [
     	[{val:''},{val:''},{val:''}],
     	[{val:''},{val:''},{val:''}],
@@ -17,7 +18,7 @@ angular.module('newTicApp')
     $scope.resetStyle = {background: 'green'};
 
     // Sets visibility  for windows.
-    $scope.resetVisible = {view: false};
+    $scope.resetVisible = {view: true};
     $scope.gameOverVisible = {view: false};
 
     $scope.addXO = function(cell) {
@@ -41,7 +42,8 @@ angular.module('newTicApp')
 		else
 		{
 			// Test diagonals
-			if (cellArray[1][1].val != "") {
+			if (cellArray[1][1].val != "") 
+			{
 				if ((cellArray[0][0].val == cellArray[1][1].val &&
 					 cellArray[1][1].val == cellArray[2][2].val) ||
 					(cellArray[0][2].val == cellArray[1][1].val &&

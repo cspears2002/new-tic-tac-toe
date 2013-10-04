@@ -21,33 +21,11 @@
 
 	<!-- Game board -->
 	<div class="board_container">
-		
-		<div class="game_over_notification" ng-model="gameOverVisible" ng-hide="gameOverVisible.view==false" ng-show="gameOverVisible.view==true">
-			<div class="game_over_text">
-				Thank You For Playing
-			</div>
-		</div>
-		
-		<div class="reset_notification" id="reset_popup" ng-model="resetVisible" ng-hide="resetVisible.view==false" ng-show="resetVisible.view==true">
-			<div class="reset_buttons_labels">
-				New Game?
-				<div class="yes_button">
-					<div class="y_n_label">
-						<label>Yes?</label>
-					</div>
-					<div class="y_n_button">
-						<input type="button" ng-click="resetGame()">
-					</div>
+
+		<div class="reset_notification" ng-model="resetVisible" ng-hide="resetVisible.view==false" ng-show="resetVisible.view==true">
+				<div class="new_game">
+					<input type="button" ng-click="resetGame()">New Game?</input>
 				</div>
-				<div class="no_button">
-					<div class="y_n_label">
-				 		<label>No?</label>
-				 	</div>
-				 	<div class="y_n_button">
-						<input type="button" ng-click="gameOver()">
-					</div>
-				</div>
-			</div>
 		</div>
 		
 		<!-- Create board -->
@@ -58,4 +36,5 @@
     	</div>
 
 	</div>
+
 </div>

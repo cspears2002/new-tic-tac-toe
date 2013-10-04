@@ -163,51 +163,19 @@ textarea {
   left: 45.9px;
   background-color: #666666;
   position: absolute;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  opacity: 0.8;
-}
-
-.game_over_notification {
-  width: 70%;
-  height: 230px;
-  margin: 0 auto;
-  top: 41px;
-  left: 45.9px;
-  background-color: #666666;
-  position: absolute;
-  color: white;
-  font-family: Arial, sans-serif;
   font-size: 25px;
+  font-family: Arial, sans-serif;
   text-align: center;
   opacity: 0.8;
 }
 
-.game_over_text {
-  margin-top: 70px;
-}
+.new_game {
+  margin-top: 80px;
+};
 
 .reset_buttons_labels {
   margin: 50px;
   color: white;
-}
-
-.yes_button {
-  width: 70%;
-  margin: 10px;
-}
-
-.no_button {
-  width: 70%;
-  margin: 10px;
-}
-
-.y_n_label {
-  float: left;
-}
-
-.y_n_button {
-  float: left;
 }
 
 /* -----Game board----- */
