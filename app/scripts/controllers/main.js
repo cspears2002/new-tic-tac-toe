@@ -94,6 +94,9 @@ angular.module('newTicApp')
 	};
 
 	$scope.resetGame = function() {
+		// Reset the radio buttons.
+		$scope.radio = 0;
+
 		// Set reset button to green.
 		$scope.resetStyle = {background: 'green'};
 
