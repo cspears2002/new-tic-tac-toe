@@ -10,6 +10,9 @@ angular.module('newTicApp')
     ];
 
     $scope.winStyle = {};
+    $scope.winStyle2 = {};
+
+    $scope.visible = false;
 
     $scope.addXO = function(p_index,index) {
 		if ($scope.radio == 1 && $scope.ticTacToe[p_index][index] != "O")
@@ -60,10 +63,12 @@ angular.module('newTicApp')
 
 		if ($scope.radio == 1) {
 			$scope.winStyle = {background:'#ffff11'};
+			$scope.visible = true;
 		}
 
 		if ($scope.radio == 2) {
-			$scope.winStyle = {background:'#ffff11'};
+			$scope.winStyle2 = {background:'#ffff11'};
+			$scope.visible = true;
 		}
 	};
 

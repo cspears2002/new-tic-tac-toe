@@ -11,7 +11,7 @@
 			<input type="radio" name="player" id="player_1" ng-model="radio" value="1">
 			<label>Player 1</label>
 		</div>
-		<div class="player_2_radio">
+		<div class="player_2_radio" ng-style="winStyle2">
 			<div class="player_2_inner">
 				<label>Player 2</label>
 				<input type="radio" name="player" id="player_2" ng-model="radio" value="2">
@@ -22,7 +22,7 @@
 	<!-- Game board -->
 	<div class="board_container">
 
-		<div class="reset_notification" id="reset_popup">
+		<div class="reset_notification" id="reset_popup" ng-model="visible" ng-hide="visible==false" ng-show="visible==true">
 			<div class="reset_buttons_labels">
 				New Game?
 				<div class="yes_button">
