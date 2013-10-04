@@ -9,10 +9,14 @@ angular.module('newTicApp')
     	[{val:''},{val:''},{val:''}]
     ];
 
+    $scope.turn = {number:0};
+
+    // Styles.
     $scope.winStyle = {};
     $scope.winStyle2 = {};
-    $scope.resetStyle = {background:'green'}
+    $scope.resetStyle = {background:'green'};
 
+    // Sets visibility  for windows.
     $scope.resetVisible = {view: false};
     $scope.gameOverVisible = {view: false};
 
@@ -23,43 +27,51 @@ angular.module('newTicApp')
 		if ($scope.radio == 2 && cell.val != "X")
 			cell.val = "O";
 
-		$scope.identifyWin($scope.ticTacToe);
+		$scope.identifyWin($scope.ticTacToe, $scope.turn);
   	};
 
-	$scope.identifyWin = function(cellArray) {
+	$scope.identifyWin = function(cellArray, turnObj) {
+		turnObj.number++;
 
-		// Test diagonals
-		if (cellArray[1][1].val != "") {
-			if ((cellArray[0][0].val == cellArray[1][1].val &&
-				 cellArray[1][1].val == cellArray[2][2].val) ||
-				(cellArray[0][2].val == cellArray[1][1].val &&
-			 	 cellArray[1][1].val == cellArray[2][0].val)) 
-			{
-				$scope.changeBgClr();		
-			}
-		}
-
-		// Test columns.
-		for(var c = 1; c <= 3; ++c)
+		if (turnObj.number == 9)
 		{
-			if(cellArray[0][c-1].val == cellArray[1][c-1].val  && 
-			   cellArray[1][c-1].val == cellArray[2][c-1].val  && 
-		   	   cellArray[0][c-1].val != "")
-			{
-				$scope.changeBgClr();
-			}
+			alert("Tie!");
 		}
-
-		// Test rows.
-		for(var r = 1; r <= 3; ++r)
+		else
 		{
-			if(cellArray[r-1][0].val == cellArray[r-1][1].val && 
-		   	   cellArray[r-1][1].val == cellArray[r-1][2].val && 
-		   	   cellArray[r-1][0].val != "")
-			{
-				$scope.changeBgClr();
+			// Test diagonals
+			if (cellArray[1][1].val != "") {
+				if ((cellArray[0][0].val == cellArray[1][1].val &&
+					 cellArray[1][1].val == cellArray[2][2].val) ||
+					(cellArray[0][2].val == cellArray[1][1].val &&
+			 	 	cellArray[1][1].val == cellArray[2][0].val)) 
+				{
+					$scope.changeBgClr();		
+				}
 			}
-		}
+
+			// Test columns.
+			for(var c = 1; c <= 3; ++c)
+			{
+				if(cellArray[0][c-1].val == cellArray[1][c-1].val  && 
+			   	   cellArray[1][c-1].val == cellArray[2][c-1].val  && 
+		   	   	   cellArray[0][c-1].val != "")
+				{
+					$scope.changeBgClr();
+				}
+			}
+
+			// Test rows.
+			for(var r = 1; r <= 3; ++r)
+			{
+				if(cellArray[r-1][0].val == cellArray[r-1][1].val && 
+		   	   	   cellArray[r-1][1].val == cellArray[r-1][2].val && 
+		   	   	   cellArray[r-1][0].val != "")
+				{
+					$scope.changeBgClr();
+				}
+			}
+		} 
 	};
 
 	$scope.changeBgClr = function() {
