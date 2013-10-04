@@ -13,7 +13,7 @@ angular.module('newTicApp')
     $scope.winStyle2 = {};
     $scope.resetStyle = {background:'green'}
 
-    $scope.visible = false;
+    $scope.visible = {view: false};
 
     $scope.addXO = function(cell) {
 		if ($scope.radio == 1 && cell.val != "O")
@@ -64,22 +64,30 @@ angular.module('newTicApp')
 
 		if ($scope.radio == 1) {
 			$scope.winStyle = {background:'#ffff11'};
-			$scope.visible = true;
+			$scope.visible.view = true;
 		}
 
 		if ($scope.radio == 2) {
 			$scope.winStyle2 = {background:'#ffff11'};
-			$scope.visible = true;
+			$scope.visible.view = true;
 		}
 	};
 
+	$scope.resetGame = function() {
+		// Clear board.
+		for(var r = 1; r <=3; ++r)
+		{
+			for(var c = 1; c <= 3; ++c)
+			{	
+				$scope.ticTacToe[r-1][c-1].val = "";
+			}
+		}
+
+		// Hide reset popup window
+		$scope.visible.view = false;
+
+	};
+
   });
-
-
-function resetGame(element){
-	element.style.background = '#ff0000';
-
-	document.getElementById("reset_popup").style.display = "block";
-}
 
 
