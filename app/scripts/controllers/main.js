@@ -4,9 +4,9 @@ angular.module('newTicApp')
   .controller('MainCtrl', function ($scope) {
 
     $scope.ticTacToe = [
-    	['','',''],
-    	['','',''],
-    	['','','']
+    	[{val:''},{val:''},{val:''}],
+    	[{val:''},{val:''},{val:''}],
+    	[{val:''},{val:''},{val:''}]
     ];
 
     $scope.winStyle = {};
@@ -15,12 +15,12 @@ angular.module('newTicApp')
 
     $scope.visible = false;
 
-    $scope.addXO = function(p_index,index) {
-		if ($scope.radio == 1 && $scope.ticTacToe[p_index][index] != "O")
-			$scope.ticTacToe[p_index][index]  = "X";
+    $scope.addXO = function(cell) {
+		if ($scope.radio == 1 && cell.val != "O")
+			cell.val = "X";
 
-		if ($scope.radio == 2 && $scope.ticTacToe[p_index][index]  != "X")
-			$scope.ticTacToe[p_index][index]  = "O";
+		if ($scope.radio == 2 && cell.val != "X")
+			cell.val = "O";
 
 		$scope.identifyWin($scope.ticTacToe);
   	};

@@ -47,7 +47,7 @@
 		<!-- Create board -->
 		<div>
 			<div class="row clearfix" ng-repeat="row in ticTacToe">
-      			<div class="box" ng-bind="cell" ng-repeat="cell in row" ng-click="addXO($parent.$index, $index)"></div>
+      			<div class="box" ng-bind="cell.val" ng-repeat="cell in row" ng-click="addXO(cell)"></div>
     		</div>
     	</div>
 
