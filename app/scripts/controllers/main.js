@@ -13,7 +13,8 @@ angular.module('newTicApp')
     $scope.winStyle2 = {};
     $scope.resetStyle = {background:'green'}
 
-    $scope.visible = {view: false};
+    $scope.resetVisible = {view: false};
+    $scope.gameOverVisible = {view: false};
 
     $scope.addXO = function(cell) {
 		if ($scope.radio == 1 && cell.val != "O")
@@ -26,6 +27,7 @@ angular.module('newTicApp')
   	};
 
 	$scope.identifyWin = function(cellArray) {
+
 		// Test diagonals
 		if (cellArray[1][1].val != "") {
 			if ((cellArray[0][0].val == cellArray[1][1].val &&
@@ -64,12 +66,12 @@ angular.module('newTicApp')
 
 		if ($scope.radio == 1) {
 			$scope.winStyle = {background:'#ffff11'};
-			$scope.visible.view = true;
+			$scope.resetVisible.view = true;
 		}
 
 		if ($scope.radio == 2) {
 			$scope.winStyle2 = {background:'#ffff11'};
-			$scope.visible.view = true;
+			$scope.resetVisible.view = true;
 		}
 	};
 
@@ -84,8 +86,16 @@ angular.module('newTicApp')
 		}
 
 		// Hide reset popup window
-		$scope.visible.view = false;
+		$scope.resetVisible.view = false;
 
+		// Reset radio button backgrounds
+		$scope.winStyle = {};
+    	$scope.winStyle2 = {};
+	};
+
+	$scope.gameOver = function() {
+		$scope.resetVisible.view = false;
+		$scope.gameOverVisible.view = true;
 	};
 
   });
