@@ -9,12 +9,12 @@ angular.module('newTicApp')
     	[{val:''},{val:''},{val:''}]
     ];
 
-    $scope.turn = {number:0};
+    $scope.turn = {number: 0};
 
     // Styles.
     $scope.winStyle = {};
     $scope.winStyle2 = {};
-    $scope.resetStyle = {background:'green'};
+    $scope.resetStyle = {background: 'green'};
 
     // Sets visibility  for windows.
     $scope.resetVisible = {view: false};
@@ -35,7 +35,8 @@ angular.module('newTicApp')
 
 		if (turnObj.number == 9)
 		{
-			alert("Tie!");
+			$scope.winStyle = $scope.winStyle2 = {background:'#ffff11'};
+			$scope.resetVisible.view = true;
 		}
 		else
 		{
@@ -44,7 +45,7 @@ angular.module('newTicApp')
 				if ((cellArray[0][0].val == cellArray[1][1].val &&
 					 cellArray[1][1].val == cellArray[2][2].val) ||
 					(cellArray[0][2].val == cellArray[1][1].val &&
-			 	 	cellArray[1][1].val == cellArray[2][0].val)) 
+			 	 	 cellArray[1][1].val == cellArray[2][0].val)) 
 				{
 					$scope.changeBgClr();		
 				}
