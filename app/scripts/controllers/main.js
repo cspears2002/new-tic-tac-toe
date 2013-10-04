@@ -88,7 +88,15 @@ angular.module('newTicApp')
 		}
 	};
 
+	$scope.pressResetButton= function() {
+		$scope.resetStyle = {background: 'red'};
+		$scope.resetVisible.view = true;
+	};
+
 	$scope.resetGame = function() {
+		// Set reset button to green.
+		$scope.resetStyle = {background: 'green'};
+
 		// Clear board.
 		for(var r = 1; r <=3; ++r)
 		{
