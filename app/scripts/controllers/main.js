@@ -10,7 +10,7 @@ angular.module('newTicApp')
     	[{val:''},{val:''},{val:''}]
     ];
 
-    $scope.turn = {number: 0};
+    $scope.turn = {number: 1};
 
     // Styles.
     $scope.winStyle = {};
@@ -21,19 +21,29 @@ angular.module('newTicApp')
     $scope.resetVisible = {view: true};
     $scope.gameOverVisible = {view: false};
 
-    $scope.addXO = function(cell) {
+    $scope.addXO = function(cell, turnObj) {
+    	console.log(turnObj.number);
+
+    	if (turnObj.number % 2 == 0)
+    	{
+    		$scope.radio = 2;
+    	}
+    	else
+    	{
+    		$scope.radio = 1;
+    	}
+
 		if ($scope.radio == 1 && cell.val != "O")
 			cell.val = "X";
 
 		if ($scope.radio == 2 && cell.val != "X")
 			cell.val = "O";
 
-		$scope.identifyWin($scope.ticTacToe, $scope.turn);
+		$scope.identifyWin($scope.ticTacToe, turnObj);
   	};
 
 	$scope.identifyWin = function(cellArray, turnObj) {
-		turnObj.number++;
-
+		console.log(turnObj.number);
 		if (turnObj.number == 9)
 		{
 			$scope.winStyle = $scope.winStyle2 = {background:'#ffff11'};
@@ -74,6 +84,18 @@ angular.module('newTicApp')
 					$scope.changeBgClr();
 				}
 			}
+
+			// Increment turn counter if the tests don't find a win.
+			turnObj.number++;
+
+			if (turnObj.number % 2 == 0)
+    		{
+    			$scope.radio = 2;
+    		}
+    		else
+    		{
+    			$scope.radio = 1;
+    		}
 		} 
 	};
 
@@ -96,8 +118,11 @@ angular.module('newTicApp')
 	};
 
 	$scope.resetGame = function() {
+		// Reset turn counter
+		$scope.turn = {number: 1};
+
 		// Reset the radio buttons.
-		$scope.radio = 0;
+		$scope.radio = 1;
 
 		// Set reset button to green.
 		$scope.resetStyle = {background: 'green'};
