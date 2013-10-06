@@ -113,6 +113,7 @@ textarea {
   margin: 0 auto;
   float: center;
   margin-top: 15px;
+  font-family: Arial, sans-serif;
 }
 
 /* -----Reset button----- */
@@ -204,6 +205,15 @@ textarea {
 .row {
   width: 306px;
   height: 102px;
+}
+
+/* -----About page----- */
+
+.about_container {
+  font-family: Arial, sans-serif;
+  background-color: #EEEEEE;
+  padding: 10px;
+  line-height: 30px;
 }
 
 /* ==========================================================================

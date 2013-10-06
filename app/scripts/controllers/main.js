@@ -1,7 +1,9 @@
 'use strict';
 
 function AboutCtrl($scope, $location) {
-	$scope.greeting = "Hello World!"
+	$scope.blog = 'http://chrisspearswebdev.blogspot.com/';
+	$scope.twitterHandle = '@cspears2002';
+	$scope.linkedIn = 'http://www.linkedin.com/pub/christopher-spears/6/580/945'
 }
 
 angular.module('newTicApp')
