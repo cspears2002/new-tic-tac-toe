@@ -1,7 +1,11 @@
 'use strict';
 
+function AboutCtrl($scope, $location) {
+	$scope.greeting = "Hello World!"
+}
+
 angular.module('newTicApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $location) {
 
   	// Represents tic tac toe board.
     $scope.ticTacToe = [
@@ -150,5 +154,4 @@ angular.module('newTicApp')
 	};
 
   });
-
 
