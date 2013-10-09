@@ -21,8 +21,6 @@ angular.module('newTicApp')
     $scope.resetVisible = {view: true};
     $scope.gameOverVisible = {view: false};
 
-    $scope.changeBg = {bgColor: false};
-
     $scope.addXO = function(cell, turnObj) {
 
     	if (turnObj.number % 2 == 0)
@@ -36,12 +34,10 @@ angular.module('newTicApp')
 
 		if ($scope.radio == 1 && cell.val != "O")
 			cell.val = "X";
-			$scope.changeBg = {bgColor: true};
-
+	
 		if ($scope.radio == 2 && cell.val != "X")
 			cell.val = "O";
-			$scope.changeBg = {bgColor: true};
-
+			
 		$scope.identifyWin($scope.ticTacToe, turnObj);
   	};
 

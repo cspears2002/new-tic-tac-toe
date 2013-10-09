@@ -25,8 +25,16 @@ angular.module('newTicApp', [])
       restrict: "A",
       link: function (scope, element, attr) {
         scope.$watch(attr.changeBg, function(value) {
-          if (value == true) {
-            element.css("backgroundColor", "#D1EEEE");
+          switch (value) 
+          {
+            case 'X':
+              element.css("backgroundColor", "#D1EEEE");
+              break;
+            case 'O':
+              element.css("backgroundColor", "#DB2929");
+              break;
+            default:
+              element.css("backgroundColor", "FFFFFF");
           }
 
         })
