@@ -13,10 +13,16 @@ angular.module('newTicApp')
     ];
 
     // Hook up Firebase
-  	var database = new Firebase("https://fire-cspears2002-newtic.firebaseio.com");
+    $scope.player1 = Math.ceil(100 * Math.random());
+    $scope.player2 = Math.ceil(100 * Math.random());
+    if($scope.player1 == $scope.player2) {
+    	$scope.player2++;
+    }
+  	var database = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/game/" + $scope.player1 + ":" + $scope.player2);
   	angularFire(database, $scope, "ticTacToe");
 
     $scope.turn = {number: 1};
+    $scope.numPlayers = 0;
 
     // Styles.
     $scope.winStyle = {};
@@ -26,6 +32,7 @@ angular.module('newTicApp')
     // Sets visibility  for windows.
     $scope.resetVisible = {view: true};
     $scope.gameOverVisible = {view: false};
+    $scope.startGame = {view: false};
 
     $scope.addXO = function(cell, turnObj) {
 
@@ -122,9 +129,6 @@ angular.module('newTicApp')
 	};
 
 	$scope.resetGame = function() {
-		
-		// Reset turn counter
-		$scope.turn = {number: 1};
 
 		// Reset the radio buttons.
 		$scope.radio = 1;
@@ -147,6 +151,14 @@ angular.module('newTicApp')
 		// Reset radio button backgrounds
 		$scope.winStyle = {};
     	$scope.winStyle2 = {};
+
+		// Create room and add to array
+		$scope.roomArray.push({
+			board: $scope.ticTacToe,
+			turn: 1,
+			players: $scope.numPlayers++
+		});
+
 	};
 
 	$scope.gameOver = function() {
