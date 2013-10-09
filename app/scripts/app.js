@@ -34,9 +34,8 @@ angular.module('newTicApp', [])
               element.css("backgroundColor", "#DB2929");
               break;
             default:
-              element.css("backgroundColor", "FFFFFF");
+              element.css("backgroundColor", "#FFFFFF");
           }
-
         })
       }
     }
