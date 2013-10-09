@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('newTicApp', [])
+angular.module('newTicApp', ["firebase"])
   .config(function ($routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
     //$locationProvider.hashPrefix('!');

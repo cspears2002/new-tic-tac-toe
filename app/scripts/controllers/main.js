@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('newTicApp')
-  .controller('MainCtrl', function ($scope, $location) {
+  .controller('MainCtrl', function ($scope, $location, angularFire) {
+
+  	$scope.roomArray = [];
 
   	// Represents tic tac toe board.
     $scope.ticTacToe = [
@@ -9,6 +11,10 @@ angular.module('newTicApp')
     	[{val:''},{val:''},{val:''}],
     	[{val:''},{val:''},{val:''}]
     ];
+
+    // Hook up Firebase
+  	var database = new Firebase("https://fire-cspears2002-newtic.firebaseio.com");
+  	angularFire(database, $scope, "ticTacToe");
 
     $scope.turn = {number: 1};
 
@@ -116,6 +122,7 @@ angular.module('newTicApp')
 	};
 
 	$scope.resetGame = function() {
+		
 		// Reset turn counter
 		$scope.turn = {number: 1};
 
