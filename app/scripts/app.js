@@ -19,12 +19,12 @@ angular.module('newTicApp', [])
       });
   })
 
-  .directive('changeBg', function () { 
+  .directive('cellBg', function () { 
     return {
       //replace: true,
       restrict: "A",
       link: function (scope, element, attr) {
-        scope.$watch(attr.changeBg, function(value) {
+        scope.$watch(attr.cellBg, function(value) {
           switch (value) 
           {
             case 'X':
