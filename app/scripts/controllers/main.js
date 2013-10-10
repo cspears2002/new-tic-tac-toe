@@ -31,7 +31,7 @@ angular.module('newTicApp')
 
   		roomPromise.then (function(){
 
-  			var fbRef = dbRooms.push($scope.room);
+  			var fbRef = dbRooms.push(angular.copy($scope.room));
   			var roomId = fbRef.name();
   			// Push on to firebase
   			dbQueue.push({id: roomId});
