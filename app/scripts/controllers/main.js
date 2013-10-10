@@ -18,11 +18,16 @@ angular.module('newTicApp')
     if($scope.player1 == $scope.player2) {
     	$scope.player2++;
     }
-  	var database = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/game/" + $scope.player1 + ":" + $scope.player2);
-  	angularFire(database, $scope, "ticTacToe");
 
-    $scope.turn = {number: 1};
+    $scope.turn = 1;
     $scope.numPlayers = 0;
+  	$scope.room = {
+  		board: $scope.ticTacToe,
+  		turn: $scope.turn,
+  		players: $scope.numPlayers
+  	}
+  	var database = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/game/" + $scope.player1 + ":" + $scope.player2);
+  	angularFire(database, $scope, "room");
 
     // Styles.
     $scope.winStyle = {};
