@@ -4,8 +4,9 @@ angular.module('newTicApp')
   .controller('MainCtrl', function ($scope, $location, angularFire) {
 
     // Create a queue and hook to firebase.
-    $scope.queue = {};
+    
     var dbQueue = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/queue/");
+    $scope.queue = {};
   	var queuePromise = angularFire(dbQueue, $scope, "queue", {});
 
   	queuePromise.then (function () {
@@ -26,6 +27,7 @@ angular.module('newTicApp')
   		}
 
   		// Push rooms on to firebase.
+  		$scope.rooms = {};
   		var dbRooms = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/rooms/");
   		var roomPromise = angularFire(dbRooms, $scope, "rooms");
 
