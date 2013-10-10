@@ -3,38 +3,41 @@
 angular.module('newTicApp')
   .controller('MainCtrl', function ($scope, $location, angularFire) {
 
-  	$scope.roomArray = [];
+    // Create a queue and hook to firebase.
+    $scope.queue = {};
+    var dbQueue = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/queue/");
+  	angularFire(dbQueue, $scope, "queue", {});
 
-  	// Represents tic tac toe board.
+
+    // Hook up Firebase and build a room.
     $scope.ticTacToe = [
     	[{val:''},{val:''},{val:''}],
     	[{val:''},{val:''},{val:''}],
     	[{val:''},{val:''},{val:''}]
     ];
 
-    // Hook up Firebase
-    $scope.player1 = Math.ceil(100 * Math.random());
-    $scope.player2 = Math.ceil(100 * Math.random());
-    if($scope.player1 == $scope.player2) {
-    	$scope.player2++;
-    }
-
     $scope.turn = 1;
     $scope.numPlayers = 0;
   	$scope.room = {
   		board: $scope.ticTacToe,
   		turn: $scope.turn,
-  		players: $scope.numPlayers
+  		numPlayers: $scope.numPlayers
   	}
-  	var database = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/game/" + $scope.player1 + ":" + $scope.player2);
-  	angularFire(database, $scope, "room");
+
+  	// Push rooms on to firebase.
+  	var dbRooms = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/rooms/");
+  	angularFire(dbRooms, $scope, "rooms");
+  	var fbRef = dbRooms.push($scope.room);
+  	var roomId = fbRef.name();
+  	// Push on to firebase
+  	dbQueue.push({id: roomId});
 
     // Styles.
     $scope.winStyle = {};
     $scope.winStyle2 = {};
     $scope.resetStyle = {background: 'green'};
 
-    // Sets visibility  for windows.
+    // Sets visibility for windows.
     $scope.resetVisible = {view: true};
     $scope.gameOverVisible = {view: false};
     $scope.startGame = {view: false};
