@@ -19,18 +19,15 @@ angular.module('newTicApp')
     	$scope.player2++;
     }
 
-    // Create room and add to array
     $scope.turn = 1;
     $scope.numPlayers = 0;
-
-	$scope.room = {
-		board: $scope.ticTacToe,
-		turn: $scope.turn,
-		players: $scope.numPlayers++
-	});
-
+  	$scope.room = {
+  		board: $scope.ticTacToe,
+  		turn: $scope.turn,
+  		players: $scope.numPlayers
+  	}
   	var database = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/game/" + $scope.player1 + ":" + $scope.player2);
-  	angularFire(database, $scope, "ticTacToe");
+  	angularFire(database, $scope, "room");
 
     // Styles.
     $scope.winStyle = {};
