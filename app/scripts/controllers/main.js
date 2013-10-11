@@ -22,8 +22,7 @@ angular.module('newTicApp')
     			console.log("I'm player 1");
           		$scope.player = "p1";
 
-  				// Get room id
-  				//$scope.rooms.id = $scope.roomId;
+  				// Push room on to firebase
   				var fbRef = dbRooms.push({
   					board: [
   						[{val:''},{val:''},{val:''}],
@@ -32,10 +31,14 @@ angular.module('newTicApp')
     				],
   					turn: "p1",
   					player: $scope.player,
-  					id: 1
   				});
+
+  				// Get room id
   				$scope.roomId = fbRef.name();
+
+  				// This line is overwriting my board.
   				$scope.rooms.id = $scope.roomId;
+  				
   				dbQueue.push({id: $scope.roomId});
   				console.log("Player 1's room is: " + $scope.roomId);
   			} else {

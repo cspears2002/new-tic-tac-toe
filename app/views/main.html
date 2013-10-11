@@ -31,8 +31,8 @@
 		
 		<!-- Create board -->
 		<div>
-			<div class="row clearfix" ng-repeat="row in room.board">
-      			<div class="box" ng-bind="cell.val" ng-repeat="cell in row" ng-click="addXO(cell,room.turn)" cell-bg="cell.val"></div>
+			<div class="row clearfix" ng-repeat="row in rooms[roomId]">
+      			<div class="box" ng-bind="cell.val" ng-repeat="cell in row" ng-click="addXO(cell,room[roomId][turn])" cell-bg="cell.val"></div>
     		</div>
     	</div>
 
