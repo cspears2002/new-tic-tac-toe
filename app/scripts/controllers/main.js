@@ -11,8 +11,8 @@ angular.module('newTicApp')
   	queuePromise.then (function () {
 
   		// Create an entry called rooms for firebase.
-  		$scope.rooms = {};
   		var dbRooms = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/rooms/");
+  		$scope.rooms = {};
   		var roomPromise = angularFire(dbRooms, $scope, "rooms");
 
   		roomPromise.then (function(){
@@ -22,23 +22,20 @@ angular.module('newTicApp')
     			console.log("I'm player 1");
           		$scope.player = "p1";
 
-    			// Build a room and push it into firebase.
-    			$scope.ticTacToe = [
-    				[{val:''},{val:''},{val:''}],
-    				[{val:''},{val:''},{val:''}],
-    				[{val:''},{val:''},{val:''}]
-    			];
-
-  				var fbRef = dbRooms.push({
-  					board: $scope.ticTacToe,
-  					turn: $scope.turn,
-  					player: $scope.player
-  				});
-
   				// Get room id
+  				//$scope.rooms.id = $scope.roomId;
+  				var fbRef = dbRooms.push({
+  					board: [
+  						[{val:''},{val:''},{val:''}],
+    					[{val:''},{val:''},{val:''}],
+    					[{val:''},{val:''},{val:''}]
+    				],
+  					turn: "p1",
+  					player: $scope.player,
+  					id: 1
+  				});
   				$scope.roomId = fbRef.name();
   				dbQueue.push({id: $scope.roomId});
-  				$scope.rooms.id = $scope.roomId;
   				console.log("Player 1's room is: " + $scope.roomId);
   			} else {
   				console.log("I'm player 2");
