@@ -35,6 +35,7 @@ angular.module('newTicApp')
   					id: 1
   				});
   				$scope.roomId = fbRef.name();
+  				$scope.rooms.id = $scope.roomId;
   				dbQueue.push({id: $scope.roomId});
   				console.log("Player 1's room is: " + $scope.roomId);
   			} else {
