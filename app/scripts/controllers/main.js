@@ -31,7 +31,9 @@ angular.module('newTicApp')
     				],
   					turn: $scope.player,
   					player: $scope.player,
-  					waiting: false
+  					waiting: true,
+  					win: false,
+  					radio: 1
   				});
 
   				// Get room id
@@ -47,8 +49,9 @@ angular.module('newTicApp')
           		// Point player 2 at the proper room and
           		// set the room variables 
           		$scope.roomId = $scope.queue.id;
-          		$scope.rooms[$scope.roomId].turn = "p2";
+          		$scope.rooms[$scope.roomId].turn = $scope.player;
           		$scope.rooms[$scope.roomId].player = $scope.player;
+          		$scope.rooms[$scope.roomId].waiting = false;
 
           		// Clear queue on firebase
           		dbQueue.remove();
@@ -65,23 +68,23 @@ angular.module('newTicApp')
     		$scope.gameOverVisible = {view: false};
     		$scope.startGame = {view: false};
 
-    		$scope.addXO = function(cell, turnObj) {
+    		$scope.addXO = function(cell, room) {
 
-    			if (turnObj.number % 2 == 0)
+    			if (room.turn % 2 == 0)
     			{
-    				$scope.radio = 2;
+    				room.radio = 2;
     			}
     			else
     			{
-    				$scope.radio = 1;
+    				room.radio = 1;
     			}
 
-				if ($scope.radio == 1 && cell.val != "O")
+				if (room.radio == 1 && cell.val != "O" && room.waiting == false)
 					cell.val = "X";
-				if ($scope.radio == 2 && cell.val != "X")
+				if (room.radio == 2 && cell.val != "X" && room.waiting == false)
 					cell.val = "O";
 			
-				$scope.identifyWin($scope.ticTacToe, turnObj);
+				$scope.identifyWin($scope.ticTacToe, room.turn);
   			};
 
 			$scope.identifyWin = function(cellArray, turnObj) {
@@ -171,7 +174,7 @@ angular.module('newTicApp')
 				{
 					for(var c = 1; c <= 3; ++c)
 					{	
-						$scope.ticTacToe[r-1][c-1].val = "";
+						$scope.rooms[$scope.roomId].board[r-1][c-1].val = "";
 					}
 				}
 
