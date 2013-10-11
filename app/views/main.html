@@ -22,20 +22,26 @@
 
 	<!-- Game board -->
 	<div class="board_container">
-
+		<!--
 		<div class="reset_notification" ng-model="resetVisible" ng-hide="resetVisible.view==false" ng-show="resetVisible.view==true">
 				<div class="new_game">
 					<input type="button" ng-click="resetGame(rooms[roomId])">New Game?</input>
 				</div>
 		</div>
-		
+		-->
+
+		<div class="reset_notification" ng-hide="rooms[roomId].waiting==false" ng-show="rooms[roomId].waiting==true">
+				<div class="new_game">
+					Waiting
+				</div>
+		</div>
+
 		<!-- Create board -->
 		<div>
 			<div class="row clearfix" ng-repeat="row in rooms[roomId].board">
       			<div class="box" ng-bind="cell.val" ng-repeat="cell in row" ng-click="addXO(cell,rooms[roomId])" cell-bg="cell.val"></div>
     		</div>
     	</div>
-
 	</div>
 
 </div>

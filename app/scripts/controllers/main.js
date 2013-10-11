@@ -20,7 +20,7 @@ angular.module('newTicApp')
   			// Deal with multipe players.
   			if ($scope.queue.id == undefined) {
     			console.log("I'm player 1");
-          		$scope.player = "p1";
+          		$scope.player = 1;
 
   				// Push room on to firebase
   				var fbRef = dbRooms.push({
@@ -29,30 +29,31 @@ angular.module('newTicApp')
     					[{val:''},{val:''},{val:''}],
     					[{val:''},{val:''},{val:''}]
     				],
-  					turn: 1,
-  					player: $scope.player,
+  					turn: $scope.player,
   					waiting: true,
   					win: false,
-  					radio: 1
+  					radio: $scope.player,
+  					player: $scope.player
   				});
 
   				// Get room id
   				$scope.roomId = fbRef.name();
 
+  				//Set the radio button
+				$scope.radio = $scope.player;
+  				
   				// Show that there is a room available.
   				$scope.queue.id = $scope.roomId;
   				console.log("Player 1's room is: " + $scope.roomId);
   			} else {
   				console.log("I'm player 2");
-          		$scope.player = "p2";
+          		$scope.player = 2;
 
           		// Point player 2 at the proper room and
           		// set the room variables 
           		$scope.roomId = $scope.queue.id;
-          		$scope.rooms[$scope.roomId].turn = 2;
-          		$scope.rooms[$scope.roomId].player = $scope.player;
           		$scope.rooms[$scope.roomId].waiting = false;
-          		$scope.rooms[$scope.roomId].radio = 2;
+          		$scope.radio = $scope.rooms[$scope.roomId].radio;
 
           		// Clear queue on firebase
           		dbQueue.remove();
@@ -70,27 +71,25 @@ angular.module('newTicApp')
     		$scope.startGame = {view: false};
 
     		$scope.addXO = function(cell, room) {
-
-    			if (room.turn % 2 == 0)
-    			{
+    			if (room.waiting == false) {
+    				if (room.turn % 2 == 0) {
     				room.radio = 2;
-    			}
-    			else
-    			{
+    				}
+    				else {
     				room.radio = 1;
-    			}
+    				}
 
-    			console.log(room.waiting);
-				if (room.radio == 1 && cell.val != "O")
-					cell.val = "X";
-				if (room.radio == 2 && cell.val != "X")
-					cell.val = "O";
+					if (room.radio == 1 && cell.val != "O")
+						cell.val = "X";
+					if (room.radio == 2 && cell.val != "X")
+						cell.val = "O";
 			
-				$scope.identifyWin($scope.ticTacToe, room.turn);
+					$scope.identifyWin(room.board, room);
+				}
   			};
 
-			$scope.identifyWin = function(cellArray, turnObj) {
-				if (turnObj.number == 9)
+			$scope.identifyWin = function(cellArray, room) {
+				if (room.turn == 9)
 				{
 					$scope.winStyle = $scope.winStyle2 = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
@@ -132,9 +131,10 @@ angular.module('newTicApp')
 					}
 
 					// Increment turn counter if the tests don't find a win.
-					turnObj.number++;
-
-					if (turnObj.number % 2 == 0)
+					console.log(room.turn);
+					room.turn++;
+					console.log(room.turn);
+					if (room.turn % 2 == 0)
     				{
     					$scope.radio = 2;
     				}
@@ -165,13 +165,11 @@ angular.module('newTicApp')
 
 			$scope.resetGame = function(room) {
 
-				//Set the radio button
-				$scope.radio = room.radio;
-
 				// Set reset button to green.
 				$scope.resetStyle = {background: 'green'};
 
 				// Clear board.
+				/*
 				for(var r = 1; r <=3; ++r)
 				{
 					for(var c = 1; c <= 3; ++c)
@@ -179,6 +177,7 @@ angular.module('newTicApp')
 						room.board[r-1][c-1].val = "";
 					}
 				}
+				*/
 
 				// Hide reset popup window
 				$scope.resetVisible.view = false;
