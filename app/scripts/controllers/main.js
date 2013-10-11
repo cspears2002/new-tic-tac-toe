@@ -29,16 +29,13 @@ angular.module('newTicApp')
     					[{val:''},{val:''},{val:''}]
     				],
   					turn: 1,
+  					radio: 1,
   					waiting: true,
   					win: false,
-  					player: 1
   				});
 
   				// Get room id
   				$scope.roomId = fbRef.name();
-
-  				//Set the radio button
-				$scope.radio = 1;
   				
   				// Show that there is a room available.
   				$scope.queue.id = $scope.roomId;
@@ -51,7 +48,6 @@ angular.module('newTicApp')
           		// set the room variables 
           		$scope.roomId = $scope.queue.id;
           		$scope.rooms[$scope.roomId].waiting = false;
-          		$scope.rooms[$scope.roomId].player = $scope.player;
 
           		$scope.radio = $scope.rooms[$scope.roomId].turn;
 
@@ -71,21 +67,20 @@ angular.module('newTicApp')
     		$scope.startGame = {view: false};
 
     		$scope.addXO = function(cell, room) {
+    			console.log(room.turn);
     			if (room.waiting == false) {
     				if (room.turn % 2 == 0) {
-    					$scope.radio = 2;
-    					room.player = 2;
+    					if (cell.val != "X")
+							cell.val = "O";
+							room.turn++;
+							room.radio = 1;
     				}
     				else {
-    					$scope.radio = 1;
-    					room.player = 1;
+    					if (cell.val != "O")
+							cell.val = "X";
+							room.turn++;
+							room.radio = 2;
     				}
-
-    				//console.log($scope.radio,cell.val,room.player);
-					if ($scope.radio == 1 && cell.val != "O" && room.player == 1)
-						cell.val = "X";
-					if ($scope.radio == 2 && cell.val != "X" && room.player == 2)
-						cell.val = "O";
 			
 					$scope.identifyWin(room.board, room);
 				}
@@ -132,19 +127,6 @@ angular.module('newTicApp')
 					 		$scope.changeBgClr(room);
 						}
 					}
-
-					// Increment turn counter if the tests don't find a win.
-					// console.log(room.turn);
-					room.turn++;
-					// console.log(room.turn);
-					
-					if (room.turn % 2 == 0) {
-    					$scope.radio = 2;
-    					room.player = 2;
-    				} else {
-    					$scope.radio = 1;
-    					room.player = 1;
-    				}
 				} 
 			};
 
