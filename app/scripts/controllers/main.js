@@ -29,7 +29,7 @@ angular.module('newTicApp')
     					[{val:''},{val:''},{val:''}],
     					[{val:''},{val:''},{val:''}]
     				],
-  					turn: $scope.player,
+  					turn: 1,
   					player: $scope.player,
   					waiting: true,
   					win: false,
@@ -49,9 +49,10 @@ angular.module('newTicApp')
           		// Point player 2 at the proper room and
           		// set the room variables 
           		$scope.roomId = $scope.queue.id;
-          		$scope.rooms[$scope.roomId].turn = $scope.player;
+          		$scope.rooms[$scope.roomId].turn = 2;
           		$scope.rooms[$scope.roomId].player = $scope.player;
           		$scope.rooms[$scope.roomId].waiting = false;
+          		$scope.rooms[$scope.roomId].radio = 2;
 
           		// Clear queue on firebase
           		dbQueue.remove();
@@ -79,9 +80,10 @@ angular.module('newTicApp')
     				room.radio = 1;
     			}
 
-				if (room.radio == 1 && cell.val != "O" && room.waiting == false)
+    			console.log(room.waiting);
+				if (room.radio == 1 && cell.val != "O")
 					cell.val = "X";
-				if (room.radio == 2 && cell.val != "X" && room.waiting == false)
+				if (room.radio == 2 && cell.val != "X")
 					cell.val = "O";
 			
 				$scope.identifyWin($scope.ticTacToe, room.turn);
@@ -161,10 +163,10 @@ angular.module('newTicApp')
 				$scope.resetVisible.view = true;
 			};
 
-			$scope.resetGame = function() {
+			$scope.resetGame = function(room) {
 
-				// Reset the radio buttons.
-				$scope.radio = 1;
+				//Set the radio button
+				$scope.radio = room.radio;
 
 				// Set reset button to green.
 				$scope.resetStyle = {background: 'green'};
@@ -174,7 +176,7 @@ angular.module('newTicApp')
 				{
 					for(var c = 1; c <= 3; ++c)
 					{	
-						$scope.rooms[$scope.roomId].board[r-1][c-1].val = "";
+						room.board[r-1][c-1].val = "";
 					}
 				}
 
