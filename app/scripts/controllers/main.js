@@ -20,7 +20,6 @@ angular.module('newTicApp')
   			// Deal with multipe players.
   			if ($scope.queue.id == undefined) {
     			console.log("I'm player 1");
-          		$scope.player = 1;
 
   				// Push room on to firebase
   				var fbRef = dbRooms.push({
@@ -29,18 +28,17 @@ angular.module('newTicApp')
     					[{val:''},{val:''},{val:''}],
     					[{val:''},{val:''},{val:''}]
     				],
-  					turn: $scope.player,
+  					turn: 1,
   					waiting: true,
   					win: false,
-  					radio: $scope.player,
-  					player: $scope.player
+  					player: 1
   				});
 
   				// Get room id
   				$scope.roomId = fbRef.name();
 
   				//Set the radio button
-				$scope.radio = $scope.player;
+				$scope.radio = 1;
   				
   				// Show that there is a room available.
   				$scope.queue.id = $scope.roomId;
@@ -54,7 +52,8 @@ angular.module('newTicApp')
           		$scope.roomId = $scope.queue.id;
           		$scope.rooms[$scope.roomId].waiting = false;
           		$scope.rooms[$scope.roomId].player = $scope.player;
-          		$scope.radio = $scope.rooms[$scope.roomId].radio;
+
+          		$scope.radio = $scope.rooms[$scope.roomId].turn;
 
           		// Clear queue on firebase
           		dbQueue.remove();
@@ -74,15 +73,14 @@ angular.module('newTicApp')
     		$scope.addXO = function(cell, room) {
     			if (room.waiting == false) {
     				if (room.turn % 2 == 0) {
-    					room.radio = 2;
+    					$scope.radio = 2;
     					room.player = 2;
     				}
     				else {
-    					room.radio = 1;
+    					$scope.radio = 1;
     					room.player = 1;
     				}
 
-    				$scope.radio = room.radio;
     				//console.log($scope.radio,cell.val,room.player);
 					if ($scope.radio == 1 && cell.val != "O" && room.player == 1)
 						cell.val = "X";
@@ -139,17 +137,19 @@ angular.module('newTicApp')
 					// console.log(room.turn);
 					room.turn++;
 					// console.log(room.turn);
-					/*
+					
 					if (room.turn % 2 == 0) {
     					$scope.radio = 2;
+    					room.player = 2;
     				} else {
     					$scope.radio = 1;
+    					room.player = 1;
     				}
-    				*/
 				} 
 			};
 
-			$scope.changeBgClr = function() {
+			$scope.changeBgClr = function(room) {
+				room.win = true;
 
 				if ($scope.radio == 1) {
 					$scope.winStyle = {background:'#ffff11'};
