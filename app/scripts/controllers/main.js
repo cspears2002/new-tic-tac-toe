@@ -4,27 +4,11 @@ angular.module('newTicApp')
   .controller('MainCtrl', function ($scope, $location, angularFire) {
 
     // Create a queue and hook to firebase.
-    
     var dbQueue = new Firebase("https://fire-cspears2002-newtic.firebaseio.com/queue/");
     $scope.queue = {};
-  	var queuePromise = angularFire(dbQueue, $scope, "queue", {});
+  	var queuePromise = angularFire(dbQueue, $scope, "queue");
 
   	queuePromise.then (function () {
-
-    	// Hook up Firebase and build a room.
-    	$scope.ticTacToe = [
-    		[{val:''},{val:''},{val:''}],
-    		[{val:''},{val:''},{val:''}],
-    		[{val:''},{val:''},{val:''}]
-    	];
-
-    	$scope.turn = 1;
-    	$scope.numPlayers = 0;
-  		$scope.room = {
-  			board: $scope.ticTacToe,
-  			turn: $scope.turn,
-  			numPlayers: $scope.numPlayers
-  		}
 
   		// Push rooms on to firebase.
   		$scope.rooms = {};
@@ -33,10 +17,42 @@ angular.module('newTicApp')
 
   		roomPromise.then (function(){
 
-  			var fbRef = dbRooms.push(angular.copy($scope.room));
-  			var roomId = fbRef.name();
-  			// Push on to firebase
-  			dbQueue.push({id: roomId});
+  			if ($scope.rooms.id == undefined) {
+    			console.log("I'm player 1");
+          		$scope.player = "p1";
+
+    			// Build a room.
+    			$scope.ticTacToe = [
+    				[{val:''},{val:''},{val:''}],
+    				[{val:''},{val:''},{val:''}],
+    				[{val:''},{val:''},{val:''}]
+    			];
+    			$scope.turn = 1;
+    			$scope.numPlayers = 0;
+  				$scope.room = {
+  					board: $scope.ticTacToe,
+  					turn: $scope.turn,
+  					player: $scope.player
+  				};
+
+  				// Get room id
+  				var fbRef = dbRooms.push(angular.copy($scope.room));
+  				$scope.roomId = fbRef.name();
+
+  				// Push on to queue
+  				dbQueue.push({id: $scope.roomId});
+  				$scope.rooms.id = $scope.roomId;
+  				console.log("Player 1's room is: " + $scope.roomId);
+  			} else {
+  				console.log("I'm player 2");
+          		$scope.player = "p2";
+
+          		$scope.roomId = $scope.rooms.id;
+
+          		// Clear queue on firebase
+          		dbQueue.remove();
+          		console.log("Player 2's game is: " + $scope.roomId);
+  			}
 
     		// Styles.
     		$scope.winStyle = {};
@@ -61,7 +77,6 @@ angular.module('newTicApp')
 
 				if ($scope.radio == 1 && cell.val != "O")
 					cell.val = "X";
-	
 				if ($scope.radio == 2 && cell.val != "X")
 					cell.val = "O";
 			
