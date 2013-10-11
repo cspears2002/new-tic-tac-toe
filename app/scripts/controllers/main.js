@@ -20,6 +20,7 @@ angular.module('newTicApp')
   			// Deal with multipe players.
   			if ($scope.queue.id == undefined) {
     			console.log("I'm player 1");
+    			$scope.player = 'p1';
 
   				// Push room on to firebase
   				var fbRef = dbRooms.push({
@@ -28,7 +29,7 @@ angular.module('newTicApp')
     					[{val:''},{val:''},{val:''}],
     					[{val:''},{val:''},{val:''}]
     				],
-  					turn: 1,
+  					turn: 'p1',
   					radio: 1,
   					waiting: true,
   					win: false,
@@ -42,7 +43,7 @@ angular.module('newTicApp')
   				console.log("Player 1's room is: " + $scope.roomId);
   			} else {
   				console.log("I'm player 2");
-          		$scope.player = 2;
+          		$scope.player = 'p2';
 
           		// Point player 2 at the proper room and
           		// set the room variables 
@@ -68,21 +69,25 @@ angular.module('newTicApp')
 
     		$scope.addXO = function(cell, room) {
     			console.log(room.turn);
-    			if (room.waiting == false) {
-    				if (room.turn % 2 == 0) {
-    					if (cell.val != "X")
-							cell.val = "O";
-							room.turn++;
-							room.radio = 1;
-    				}
-    				else {
-    					if (cell.val != "O")
+    			if (room.waiting == false && $scope.player == $scope.rooms[$scope.roomId].turn) {
+    				
+    				if (room.turn == 'p1' && cell.val != "O") {
 							cell.val = "X";
-							room.turn++;
 							room.radio = 2;
-    				}
+						}
+
+    				if (room.turn  == 'p2' && cell.val != "X") {
+							cell.val = "O";
+							room.radio = 1;
+						}
 			
 					$scope.identifyWin(room.board, room);
+
+					if (room.turn == 'p1') {
+						room.turn = 'p2';
+					} else {
+						room.turn = 'p1';
+					}
 				}
   			};
 
