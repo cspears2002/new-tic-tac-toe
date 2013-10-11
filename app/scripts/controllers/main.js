@@ -53,6 +53,7 @@ angular.module('newTicApp')
           		// set the room variables 
           		$scope.roomId = $scope.queue.id;
           		$scope.rooms[$scope.roomId].waiting = false;
+          		$scope.rooms[$scope.roomId].player = $scope.player;
           		$scope.radio = $scope.rooms[$scope.roomId].radio;
 
           		// Clear queue on firebase
@@ -73,15 +74,19 @@ angular.module('newTicApp')
     		$scope.addXO = function(cell, room) {
     			if (room.waiting == false) {
     				if (room.turn % 2 == 0) {
-    				room.radio = 2;
+    					room.radio = 2;
+    					room.player = 2;
     				}
     				else {
-    				room.radio = 1;
+    					room.radio = 1;
+    					room.player = 1;
     				}
 
-					if (room.radio == 1 && cell.val != "O")
+    				$scope.radio = room.radio;
+    				//console.log($scope.radio,cell.val,room.player);
+					if ($scope.radio == 1 && cell.val != "O" && room.player == 1)
 						cell.val = "X";
-					if (room.radio == 2 && cell.val != "X")
+					if ($scope.radio == 2 && cell.val != "X" && room.player == 2)
 						cell.val = "O";
 			
 					$scope.identifyWin(room.board, room);
@@ -104,7 +109,7 @@ angular.module('newTicApp')
 							(cellArray[0][2].val == cellArray[1][1].val &&
 			 	 	 	 	 cellArray[1][1].val == cellArray[2][0].val)) 
 						{
-							$scope.changeBgClr();		
+							$scope.changeBgClr(room);		
 						}
 					}
 
@@ -115,7 +120,7 @@ angular.module('newTicApp')
 			   	   	   	   cellArray[1][c-1].val == cellArray[2][c-1].val  && 
 		   	   	   	   	   cellArray[0][c-1].val != "")
 						{
-							$scope.changeBgClr();
+							$scope.changeBgClr(room);
 						}
 					}
 
@@ -126,22 +131,21 @@ angular.module('newTicApp')
 		   	   	   	   	   cellArray[r-1][1].val == cellArray[r-1][2].val && 
 		   	   	   	   	   cellArray[r-1][0].val != "")
 						{
-					 		$scope.changeBgClr();
+					 		$scope.changeBgClr(room);
 						}
 					}
 
 					// Increment turn counter if the tests don't find a win.
-					console.log(room.turn);
+					// console.log(room.turn);
 					room.turn++;
-					console.log(room.turn);
-					if (room.turn % 2 == 0)
-    				{
+					// console.log(room.turn);
+					/*
+					if (room.turn % 2 == 0) {
     					$scope.radio = 2;
-    				}
-    				else
-    				{
+    				} else {
     					$scope.radio = 1;
     				}
+    				*/
 				} 
 			};
 
@@ -156,6 +160,7 @@ angular.module('newTicApp')
 					$scope.winStyle2 = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
 				}
+
 			};
 
 			$scope.pressResetButton= function() {
