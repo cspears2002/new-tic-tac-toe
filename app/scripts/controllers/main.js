@@ -18,7 +18,7 @@ angular.module('newTicApp')
   		roomPromise.then (function(){
 
   			// Deal with multipe players.
-  			if ($scope.rooms.id == undefined) {
+  			if ($scope.queue.id == undefined) {
     			console.log("I'm player 1");
           		$scope.player = "p1";
 
@@ -29,23 +29,26 @@ angular.module('newTicApp')
     					[{val:''},{val:''},{val:''}],
     					[{val:''},{val:''},{val:''}]
     				],
-  					turn: "p1",
+  					turn: $scope.player,
   					player: $scope.player,
+  					waiting: false
   				});
 
   				// Get room id
   				$scope.roomId = fbRef.name();
 
-  				// This line is overwriting my board.
-  				$scope.rooms.id = $scope.roomId;
-  				
-  				dbQueue.push({id: $scope.roomId});
+  				// Show that there is a room available.
+  				$scope.queue.id = $scope.roomId;
   				console.log("Player 1's room is: " + $scope.roomId);
   			} else {
   				console.log("I'm player 2");
           		$scope.player = "p2";
 
-          		$scope.roomId = $scope.rooms.id;
+          		// Point player 2 at the proper room and
+          		// set the room variables 
+          		$scope.roomId = $scope.queue.id;
+          		$scope.rooms[$scope.roomId].turn = "p2";
+          		$scope.rooms[$scope.roomId].player = $scope.player;
 
           		// Clear queue on firebase
           		dbQueue.remove();
