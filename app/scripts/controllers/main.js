@@ -19,7 +19,7 @@ angular.module('newTicApp')
 
   			// Deal with multipe players.
   			if ($scope.queue.id == undefined) {
-    			console.log("I'm player 1");
+    			//console.log("I'm player 1");
     			$scope.player = 'p1';
 
   				// Push room on to firebase
@@ -41,9 +41,9 @@ angular.module('newTicApp')
   				
   				// Show that there is a room available.
   				$scope.queue.id = $scope.roomId;
-  				console.log("Player 1's room is: " + $scope.roomId);
+  				//console.log("Player 1's room is: " + $scope.roomId);
   			} else {
-  				console.log("I'm player 2");
+  				//console.log("I'm player 2");
           		$scope.player = 'p2';
 
           		// Point player 2 at the proper room and
@@ -55,7 +55,7 @@ angular.module('newTicApp')
 
           		// Clear queue on firebase
           		dbQueue.remove();
-          		console.log("Player 2's game is: " + $scope.roomId);
+          		//console.log("Player 2's game is: " + $scope.roomId);
   			}
 
     		// Styles.
@@ -94,6 +94,7 @@ angular.module('newTicApp')
   			};
 
 			$scope.identifyWin = function(cellArray, room) {
+				console.log(room.moves);
 				if (room.moves == 9)
 				{
 					$scope.winStyle = $scope.winStyle2 = {background:'#ffff11'};
