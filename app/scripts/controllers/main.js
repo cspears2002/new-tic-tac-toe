@@ -19,7 +19,6 @@ angular.module('newTicApp')
 
   			// Deal with multipe players.
   			if ($scope.queue.id == undefined) {
-    			//console.log("I'm player 1");
     			$scope.player = 'p1';
 
   				// Push room on to firebase
@@ -41,9 +40,7 @@ angular.module('newTicApp')
   				
   				// Show that there is a room available.
   				$scope.queue.id = $scope.roomId;
-  				//console.log("Player 1's room is: " + $scope.roomId);
   			} else {
-  				//console.log("I'm player 2");
           		$scope.player = 'p2';
 
           		// Point player 2 at the proper room and
@@ -55,7 +52,6 @@ angular.module('newTicApp')
 
           		// Clear queue on firebase
           		dbQueue.remove();
-          		//console.log("Player 2's game is: " + $scope.roomId);
   			}
 
     		// Styles.
@@ -72,13 +68,13 @@ angular.module('newTicApp')
     			if (room.waiting == false && $scope.player == room.turn) {
     				
     				if (room.turn == 'p1' && cell.val != "O") {
-							cell.val = "X";
-							room.radio = 2;
+						cell.val = "X";
+						room.radio = 2;
 					}
 
     				if (room.turn  == 'p2' && cell.val != "X") {
-							cell.val = "O";
-							room.radio = 1;
+						cell.val = "O";
+						room.radio = 1;
 					}
 					
 					room.moves++;
@@ -95,43 +91,34 @@ angular.module('newTicApp')
 
 			$scope.identifyWin = function(cellArray, room) {
 				console.log(room.moves);
-				if (room.moves == 9)
-				{
+				if (room.moves == 9) {
 					$scope.winStyle = $scope.winStyle2 = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
-				}
-				else
-				{
+				} else {
 					// Test diagonals
-					if (cellArray[1][1].val != "") 
-					{
+					if (cellArray[1][1].val != "") {
 						if ((cellArray[0][0].val == cellArray[1][1].val &&
 					 		 cellArray[1][1].val == cellArray[2][2].val) ||
 							(cellArray[0][2].val == cellArray[1][1].val &&
-			 	 	 	 	 cellArray[1][1].val == cellArray[2][0].val)) 
-						{
+			 	 	 	 	 cellArray[1][1].val == cellArray[2][0].val)) {
 							$scope.changeBgClr(room);		
 						}
 					}
 
 					// Test columns.
-					for(var c = 1; c <= 3; ++c)
-					{
+					for(var c = 1; c <= 3; ++c) {
 						if(cellArray[0][c-1].val == cellArray[1][c-1].val  && 
 			   	   	   	   cellArray[1][c-1].val == cellArray[2][c-1].val  && 
-		   	   	   	   	   cellArray[0][c-1].val != "")
-						{
+		   	   	   	   	   cellArray[0][c-1].val != "") {
 							$scope.changeBgClr(room);
 						}
 					}
 
 					// Test rows.
-					for(var r = 1; r <= 3; ++r)
-					{
+					for(var r = 1; r <= 3; ++r) {
 						if(cellArray[r-1][0].val == cellArray[r-1][1].val && 
 		   	   	   	   	   cellArray[r-1][1].val == cellArray[r-1][2].val && 
-		   	   	   	   	   cellArray[r-1][0].val != "")
-						{
+		   	   	   	   	   cellArray[r-1][0].val != "") {
 					 		$scope.changeBgClr(room);
 						}
 					}
