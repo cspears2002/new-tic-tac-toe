@@ -123,7 +123,7 @@ angular.module('newTicApp')
 				
 				// Detects a draw.
 				if (room.moves == 9 && room.win == false) {
-					$scope.winStyle = $scope.winStyle2 = {background:'#ffff11'};
+					room.winStyle = room.winStyle2 = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
 				}
 			};
