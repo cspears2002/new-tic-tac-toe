@@ -1,18 +1,13 @@
 <div class="super_container">
 	<a href="#/about">About</a>
-
-  	<!-- Reset button -->
-	<div class="restart">
-		<div id="reset_button" ng-click="pressResetButton()" ng-style="resetStyle"></div>
-	</div>
-
+	
 	<!-- Sets who puts down a 'X' or an 'O' -->
 	<div class="radio_container clearfix">
-		<div class="player_1_radio" ng-style="winStyle">
+		<div class="player_1_radio" ng-style="rooms[roomId].winStyle">
 			<input type="radio" name="player" id="player_1" ng-model="rooms[roomId].radio" value="1">
 			<label>Player 1</label>
 		</div>
-		<div class="player_2_radio" ng-style="winStyle2">
+		<div class="player_2_radio" ng-style="rooms[roomId].winStyle2">
 			<div class="player_2_inner">
 				<label>Player 2</label>
 				<input type="radio" name="player" id="player_2" ng-model="rooms[roomId].radio" value="2">
@@ -30,6 +25,7 @@
 		</div>
 		-->
 
+		<!-- Wait for two players to enter room -->
 		<div class="reset_notification" ng-hide="rooms[roomId].waiting==false" ng-show="rooms[roomId].waiting==true">
 				<div class="new_game">
 					Waiting
