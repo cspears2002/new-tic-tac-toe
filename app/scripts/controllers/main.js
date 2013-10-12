@@ -20,7 +20,7 @@ angular.module('newTicApp')
   			// Deal with multipe players.
   			if ($scope.queue.id == undefined) {
     			$scope.player = 'p1';
-    			$scope.radio = 1;
+
   				// Push room on to firebase
   				var fbRef = dbRooms.push({
   					board: [
@@ -33,6 +33,8 @@ angular.module('newTicApp')
   					radio: 1,
   					waiting: true,
   					win: false,
+  					winStyle: {},
+  					winStyle2: {}
   				});
 
   				// Get room id
@@ -53,9 +55,8 @@ angular.module('newTicApp')
   			}
 
     		// Styles.
-    		$scope.winStyle = {};
-    		$scope.winStyle2 = {};
-    		$scope.resetStyle = {background: 'green'};
+    		//$scope.winStyle = {};
+    		//$scope.winStyle2 = {};
 
     		// Sets visibility for windows.
     		$scope.resetVisible = {view: true};
@@ -128,13 +129,13 @@ angular.module('newTicApp')
 			};
 
 			$scope.changeBgClr = function(room) {
-				if ($scope.player == 'p1') {
-					$scope.winStyle = {background:'#ffff11'};
+				if (room.turn == 'p1') {
+					room.winStyle = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
 				}
 
-				if ($scope.player == 'p2') {
-					$scope.winStyle2 = {background:'#ffff11'};
+				if (room.turn == 'p2') {
+					room.winStyle2 = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
 				}
 

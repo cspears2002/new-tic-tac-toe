@@ -3,11 +3,11 @@
 	
 	<!-- Sets who puts down a 'X' or an 'O' -->
 	<div class="radio_container clearfix">
-		<div class="player_1_radio" ng-style="winStyle">
+		<div class="player_1_radio" ng-style="rooms[roomId].winStyle">
 			<input type="radio" name="player" id="player_1" ng-model="rooms[roomId].radio" value="1">
 			<label>Player 1</label>
 		</div>
-		<div class="player_2_radio" ng-style="winStyle2">
+		<div class="player_2_radio" ng-style="rooms[roomId].winStyle2">
 			<div class="player_2_inner">
 				<label>Player 2</label>
 				<input type="radio" name="player" id="player_2" ng-model="rooms[roomId].radio" value="2">
