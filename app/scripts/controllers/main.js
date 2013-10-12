@@ -65,7 +65,7 @@ angular.module('newTicApp')
     		$scope.startGame = {view: false};
 
     		$scope.addXO = function(cell, room) {
-    			if (room.waiting == false && $scope.player == room.turn) {
+    			if (room.waiting == false && room.win == false && $scope.player == room.turn) {
     				
     				if (room.turn == 'p1' && cell.val != "O") {
 						cell.val = "X";
@@ -179,3 +179,4 @@ angular.module('newTicApp')
 	});
 });
 
+	
