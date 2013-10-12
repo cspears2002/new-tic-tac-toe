@@ -30,7 +30,7 @@ angular.module('newTicApp')
     					[{val:''},{val:''},{val:''}]
     				],
   					turn: 'p1',
-  					moves: 1,
+  					moves: 0,
   					radio: 1,
   					waiting: true,
   					win: false,
