@@ -30,6 +30,7 @@ angular.module('newTicApp')
     					[{val:''},{val:''},{val:''}]
     				],
   					turn: 'p1',
+  					moves: 1,
   					radio: 1,
   					waiting: true,
   					win: false,
@@ -68,19 +69,20 @@ angular.module('newTicApp')
     		$scope.startGame = {view: false};
 
     		$scope.addXO = function(cell, room) {
-    			console.log(room.turn);
-    			if (room.waiting == false && $scope.player == $scope.rooms[$scope.roomId].turn) {
+    			if (room.waiting == false && $scope.player == room.turn) {
     				
     				if (room.turn == 'p1' && cell.val != "O") {
 							cell.val = "X";
 							room.radio = 2;
-						}
+					}
 
     				if (room.turn  == 'p2' && cell.val != "X") {
 							cell.val = "O";
 							room.radio = 1;
-						}
-			
+					}
+					
+					room.moves++;
+
 					$scope.identifyWin(room.board, room);
 
 					if (room.turn == 'p1') {
@@ -92,7 +94,7 @@ angular.module('newTicApp')
   			};
 
 			$scope.identifyWin = function(cellArray, room) {
-				if (room.turn == 9)
+				if (room.moves == 9)
 				{
 					$scope.winStyle = $scope.winStyle2 = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
@@ -138,12 +140,12 @@ angular.module('newTicApp')
 			$scope.changeBgClr = function(room) {
 				room.win = true;
 
-				if ($scope.radio == 1) {
+				if (room.turn == 'p1') {
 					$scope.winStyle = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
 				}
 
-				if ($scope.radio == 2) {
+				if (room.turn == 'p2') {
 					$scope.winStyle2 = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
 				}
