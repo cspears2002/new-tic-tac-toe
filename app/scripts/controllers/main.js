@@ -20,7 +20,7 @@ angular.module('newTicApp')
   			// Deal with multipe players.
   			if ($scope.queue.id == undefined) {
     			$scope.player = 'p1';
-
+    			$scope.radio = 1;
   				// Push room on to firebase
   				var fbRef = dbRooms.push({
   					board: [
@@ -128,21 +128,16 @@ angular.module('newTicApp')
 			};
 
 			$scope.changeBgClr = function(room) {
-				if (room.turn == 'p1') {
+				if ($scope.player == 'p1') {
 					$scope.winStyle = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
 				}
 
-				if (room.turn == 'p2') {
+				if ($scope.player == 'p2') {
 					$scope.winStyle2 = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
 				}
 
-			};
-
-			$scope.pressResetButton= function() {
-				$scope.resetStyle = {background: 'red'};
-				$scope.resetVisible.view = true;
 			};
 
 			$scope.resetGame = function(room) {
