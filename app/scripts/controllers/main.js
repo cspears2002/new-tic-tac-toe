@@ -48,8 +48,6 @@ angular.module('newTicApp')
           		$scope.roomId = $scope.queue.id;
           		$scope.rooms[$scope.roomId].waiting = false;
 
-          		$scope.radio = $scope.rooms[$scope.roomId].turn;
-
           		// Clear queue on firebase
           		dbQueue.remove();
   			}
@@ -130,7 +128,6 @@ angular.module('newTicApp')
 			};
 
 			$scope.changeBgClr = function(room) {
-
 				if (room.turn == 'p1') {
 					$scope.winStyle = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
