@@ -90,43 +90,46 @@ angular.module('newTicApp')
   			};
 
 			$scope.identifyWin = function(cellArray, room) {
-				console.log(room.moves);
-				if (room.moves == 9) {
+
+				// Test diagonals
+				if (cellArray[1][1].val != "") {
+					if ((cellArray[0][0].val == cellArray[1][1].val &&
+					 	 cellArray[1][1].val == cellArray[2][2].val) ||
+						(cellArray[0][2].val == cellArray[1][1].val &&
+			 	 	 	 cellArray[1][1].val == cellArray[2][0].val)) {
+						room.win = true;
+						$scope.changeBgClr(room);		
+					}
+				}
+
+				// Test columns.
+				for(var c = 1; c <= 3; ++c) {
+					if(cellArray[0][c-1].val == cellArray[1][c-1].val  && 
+			   	   	   cellArray[1][c-1].val == cellArray[2][c-1].val  && 
+		   	   	   	   cellArray[0][c-1].val != "") {
+						room.win = true;
+						$scope.changeBgClr(room);
+					}
+				}
+
+				// Test rows.
+				for(var r = 1; r <= 3; ++r) {
+					if(cellArray[r-1][0].val == cellArray[r-1][1].val && 
+		   	   	   	   cellArray[r-1][1].val == cellArray[r-1][2].val && 
+		   	   	   	   cellArray[r-1][0].val != "") {
+		   	   	   	   	room.win = true;
+					 	$scope.changeBgClr(room);
+					}
+				}
+				
+				// Detects a draw.
+				if (room.moves == 9 && room.win == false) {
 					$scope.winStyle = $scope.winStyle2 = {background:'#ffff11'};
 					$scope.resetVisible.view = true;
-				} else {
-					// Test diagonals
-					if (cellArray[1][1].val != "") {
-						if ((cellArray[0][0].val == cellArray[1][1].val &&
-					 		 cellArray[1][1].val == cellArray[2][2].val) ||
-							(cellArray[0][2].val == cellArray[1][1].val &&
-			 	 	 	 	 cellArray[1][1].val == cellArray[2][0].val)) {
-							$scope.changeBgClr(room);		
-						}
-					}
-
-					// Test columns.
-					for(var c = 1; c <= 3; ++c) {
-						if(cellArray[0][c-1].val == cellArray[1][c-1].val  && 
-			   	   	   	   cellArray[1][c-1].val == cellArray[2][c-1].val  && 
-		   	   	   	   	   cellArray[0][c-1].val != "") {
-							$scope.changeBgClr(room);
-						}
-					}
-
-					// Test rows.
-					for(var r = 1; r <= 3; ++r) {
-						if(cellArray[r-1][0].val == cellArray[r-1][1].val && 
-		   	   	   	   	   cellArray[r-1][1].val == cellArray[r-1][2].val && 
-		   	   	   	   	   cellArray[r-1][0].val != "") {
-					 		$scope.changeBgClr(room);
-						}
-					}
-				} 
+				}
 			};
 
 			$scope.changeBgClr = function(room) {
-				room.win = true;
 
 				if (room.turn == 'p1') {
 					$scope.winStyle = {background:'#ffff11'};
